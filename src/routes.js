@@ -1,6 +1,7 @@
 const { Router } = require('express');
 
 const MailController = require('./controllers/MailController');
+const UserController = require('./controllers/UserController');
 
 const routes = Router();
 
@@ -18,5 +19,7 @@ const routes = Router();
 
 routes.get('/mails', MailController.index);
 routes.post('/mails', MailController.store);
+
+routes.post('/user', UserController.index);
 
 module.exports = routes;
