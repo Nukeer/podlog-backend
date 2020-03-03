@@ -1,45 +1,45 @@
-// const User = require('../models/User');
-// index, show, store, update, destroy
-
-// const pg = require('pg');
-// const config = {
-//   host: 'ec2-52-86-33-50.compute-1.amazonaws.com',
-//   // Do not hard code your username and password.
-//   // Consider using Node environment variables.
-//   user: 'eyeitgwnzvsvym',
-//   password: 'e5dc2daa99a5c90a56cc2e4fdb8b440b0a12dbac081d1248b87ccc353e5dc449',
-//   database: 'd17lpl5npi2hj9',
-//   port: 5432,
-//   ssl: true
-// };
-
-// const client = new pg.Client(config);
-
-// client.connect(err => {
-//   if (err) throw err;
-//   else {
-//     queryDatabase();
-//   }
-// });
-
 const client = require('./ClientController');
+const crypto = require('../utils/Crypto');
 
 module.exports = {
   async index(req, res) {
+    const { email, password } = req.body;
+
+    const senha = crypto.criptografarSenha(password);
+
     const query = `
-        CREATE TABLE users (id serial PRIMARY KEY, name VARCHAR(50), email VARCHAR(50), admin Boolean);;
+      SELECT * FROM users WHERE email ILIKE '${email}';
     `;
 
-    client
+    return await client
       .query(query)
-      .then(() => {
-        console.log('Table created successfully!');
-        client.end(console.log('Closed client connection'));
+      .then(s => {
+        const pass = s.rows[0].password;
+        
+        delete s.rows[0].password;
+
+        if (pass === senha) {
+          return res.json({ status: 'success', record: s.rows[0] });
+        }
+
+        return res.json({ status: 'error', message: 'Senha incorreta' });
       })
-      .catch(err => console.log(err))
-      .then(() => {
-        console.log('Finished execution, exiting now');
-        process.exit();
-      });
+      .catch(err => console.log(err));
+  },
+  async store(req, res) {
+    const { name, email, password } = req.body;
+
+    const senha = crypto.criptografarSenha(password);
+
+    const query = `
+        INSERT INTO users (name, email, password, admin) VALUES ('${name}', '${email}', '${senha}', true)
+    `;
+
+    return await client
+      .query(query)
+      .then(s => {
+        return res.json({ status: 200, message: 'success' });
+      })
+      .catch(err => console.log(err));
   }
 };

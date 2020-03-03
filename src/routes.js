@@ -20,6 +20,7 @@ const routes = Router();
 routes.get('/mails', MailController.index);
 routes.post('/mails', MailController.store);
 
-routes.post('/user', UserController.index);
+routes.post('/login', UserController.index);
+routes.post('/user', UserController.store);
 
 module.exports = routes;

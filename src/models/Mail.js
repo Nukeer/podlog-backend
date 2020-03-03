@@ -6,5 +6,5 @@ const MailSchema = new mongoose.Schema({
     subject: String,
     text: String
 });
-
+    
 module.exports = mongoose.model('Mail', MailSchema);
