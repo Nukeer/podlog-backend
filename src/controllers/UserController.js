@@ -15,14 +15,14 @@ module.exports = {
       .query(query)
       .then(s => {
         const pass = s.rows[0].password;
-        
+
         delete s.rows[0].password;
 
         if (pass === senha) {
-          return res.json({ status: 'success', record: s.rows[0] });
+          return res.status(200).send({ record: s.rows[0] });
         }
 
-        return res.json({ status: 'error', message: 'Senha incorreta' });
+        return res.status(400).send({ message: 'Senha incorreta' });
       })
       .catch(err => console.log(err));
   },

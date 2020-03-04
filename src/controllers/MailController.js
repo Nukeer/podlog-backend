@@ -1,4 +1,3 @@
-const Mail = require('../models/Mail');
 const client = require('./ClientController');
 // index, show, store, update, destroy
 
@@ -11,11 +10,13 @@ module.exports = {
     return await client
       .query(query)
       .then(s => {
-        console.log(s)
-        return res.json({ status: 'success', record: s.rows });
-        // return res.json({ status: 'error', message: 'Senha incorreta' });
+        const message =
+          s.rows.length === 0
+            ? 'Não foi encontrado nenhum E-mail'
+            : 'Encontrados E-mails com sucesso';
+        return res.status(200).send({ record: s.rows, message });
       })
-      .catch(err => console.log(err));
+      .catch(err => res.status(400).send({ message: err }));
   },
   async store(req, res) {
     const { name, email, subject, text } = req.body;
@@ -26,9 +27,9 @@ module.exports = {
 
     return await client
       .query(query)
-      .then(s => {
-        return res.json({ status: 200, message: 'success' });
-      })
-      .catch(err => console.log(err));
+      .then(s =>
+        res.status(200).send({ message: 'E-mail enviado com sucesso!' })
+      )
+      .catch(err => res.status(400).send({ message: err }));
   }
 };
