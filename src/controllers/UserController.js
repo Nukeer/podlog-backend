@@ -21,7 +21,7 @@ module.exports = {
             .status(400)
             .send({ message: 'Usuário não encontrado' });
         }
-        const pass = s.rows[0];
+        const pass = s.rows[0].password;
 
         delete s.rows[0].password;
 
