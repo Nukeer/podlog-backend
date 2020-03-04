@@ -10,11 +10,18 @@ module.exports = {
     const query = `
       SELECT * FROM users WHERE email ILIKE '${email}';
     `;
-
+    if (email === '' || password === '') {
+      return res.status(400).send({ message: 'E-mail ou Senha não inserido' });
+    }
     return await client
       .query(query)
       .then(s => {
-        const pass = s.rows[0].password;
+        if (!s.rows[0]) {
+          return res
+            .status(400)
+            .send({ message: 'Usuário não encontrado' });
+        }
+        const pass = s.rows[0];
 
         delete s.rows[0].password;
 
