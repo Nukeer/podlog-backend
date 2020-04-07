@@ -1,15 +1,14 @@
 const pg = require('pg');
-
-import { environment } from '../environments/environment.prod';
+const env = require('../environments/environment.prod');
 
 const config = {
-  host: environment.host,
+  host: env.host,
   // Do not hard code your username and password.
-  // Consider using Node environment variables.
-  user: environment.user,
-  password: environment.password,
-  database: environment.database,
-  port: environment.port,
+  // Consider using Node environments variables.
+  user: env.user,
+  password: env.password,
+  database: env.database,
+  port: env.port,
   ssl: true
 };
 
