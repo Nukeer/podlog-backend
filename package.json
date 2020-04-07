@@ -4,9 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "npm run config && nodemon src/index.js",
+    "dev-build": "npm run config && nodemon src/index.js",
+    "prod-build": "npm run config && nodemon src/index.js",
     "config": "node ./config-env.js",
-    "start": "npm run config && node src/index.js"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "axios": "^0.19.1",
