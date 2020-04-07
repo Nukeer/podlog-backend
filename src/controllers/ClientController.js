@@ -1,5 +1,6 @@
 const pg = require('pg');
-const { environment } = require('../environments/environment.prod');
+
+import { environment } from '../environments/environment.prod';
 
 const config = {
   host: environment.host,
@@ -21,7 +22,7 @@ client.connect(err => {
     client.query(`
       CREATE TABLE IF NOT EXISTS users (id serial PRIMARY KEY, name VARCHAR(50), email VARCHAR(100) UNIQUE, password TEXT, admin Boolean);
       CREATE TABLE IF NOT EXISTS email (id serial PRIMARY KEY, name TEXT, email VARCHAR(100) UNIQUE, subject TEXT, text TEXT);
-    `)
+    `);
   }
 });
 
