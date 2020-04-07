@@ -15,6 +15,7 @@ const config = {
 const client = new pg.Client(config);
 
 client.connect(err => {
+  console.log(environment);
   if (err) throw err;
   else {
     client.query(`
