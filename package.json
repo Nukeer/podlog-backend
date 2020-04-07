@@ -4,10 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "prod-build": "yarn run config",
     "config": "node ./config-env.js",
     "start": "node src/index.js",
-    "heroku-postbuild": "yarn run prod-build"
+    "heroku-postbuild": "yarn run config"
   },
   "dependencies": {
     "axios": "^0.19.1",
