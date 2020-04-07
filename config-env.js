@@ -6,7 +6,7 @@ require('dotenv').config();
 function getEnvironmentVariable(key, _default = '') { return process.env[key] || _default; }
 
 function createEnvironementFile() {
-  return `export const environment = {
+  return `module.exports = environment = {
   production: true,
   host: '${getEnvironmentVariable('DATABASE_HOST')}',
   user: '${getEnvironmentVariable('DATABASE_USER')}',
@@ -27,7 +27,7 @@ console.log(`
   ${environmentFile}
 `);
 
-fs.writeFile(`./src/environments/environment.prod.ts`, environmentFile, (err) => {
+fs.writeFile(`./src/environments/environment.prod.js`, environmentFile, (err) => {
   if (err) {
     console.log(err);
   }

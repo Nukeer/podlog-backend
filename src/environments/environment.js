@@ -1,5 +1,5 @@
 // value default
-export const environment = {
+module.exports = environment = {
   production: true,
   host: '',
   user: '',
