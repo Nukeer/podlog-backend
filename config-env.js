@@ -14,6 +14,9 @@ function createEnvironementFile() {
   database: '${getEnvironmentVariable('DATABASE_NAME')}',
   port: ${getEnvironmentVariable('DATABASE_PORT')},
   ssl: true
+  algoritmo: ${getEnvironmentVariable('LOGIN_ALGORITHM')},
+  segredo: ${getEnvironmentVariable('LOGIN_SECRET')},
+  tipo: ${getEnvironmentVariable('LOGIN_TYPE')},
 };
 `;
 }

@@ -1,5 +1,6 @@
 const { Router } = require('express');
 
+const jwt = require('./utils/JsonWebToken');
 const MailController = require('./controllers/MailController');
 const UserController = require('./controllers/UserController');
 
@@ -17,7 +18,7 @@ const routes = Router();
 
 // MongoDB (Não-relacional)
 
-routes.get('/mails', MailController.index);
+routes.get('/mails', jwt.verifyJWT ,MailController.index);
 routes.post('/mails', MailController.store);
 
 routes.post('/login', UserController.index);

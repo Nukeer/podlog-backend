@@ -5,5 +5,8 @@ module.exports = environment = {
   password: '',
   database: '',
   port: '',
-  ssl: true
+  ssl: true,
+  algoritmo: '',
+  segredo: '',
+  tipo: ''
 };

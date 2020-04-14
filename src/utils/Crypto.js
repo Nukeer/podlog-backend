@@ -1,9 +1,10 @@
 const crypto = require('crypto');
+const env = require('../environments/environment.prod');
 
 const DADOS_CRIPTOGRAFAR = {
-  algoritmo: 'aes256',
-  segredo: 'prupru',
-  tipo: 'hex'
+  algoritmo: env.algoritmo,
+  segredo: env.segredo,
+  tipo: env.tipo
 };
 
 module.exports = {
