@@ -22,6 +22,8 @@ routes.get('/mails', jwt.verifyJWT ,MailController.index);
 routes.post('/mails', MailController.store);
 
 routes.post('/login', UserController.index);
-routes.post('/user', UserController.store);
+routes.delete('/logout', UserController.destroy);
+
+routes.post('/user', jwt.verifyJWT, UserController.store);
 
 module.exports = routes;
