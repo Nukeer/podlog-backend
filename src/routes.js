@@ -16,8 +16,6 @@ const routes = Router();
 // PUT or DELETE: Route params: req.params (Indentificar um recurso na alteração ou remoção)
 // POST or PUT: Body: request.body (Dados para criação ou alteração de um registro)
 
-// MongoDB (Não-relacional)
-
 routes.get('/mails', jwt.verifyJWT ,MailController.index);
 routes.post('/mails', MailController.store);
 
